@@ -5,7 +5,9 @@ import UserView from "../views/User.View";
 export default {
   async index(_request, response) {
     let users = await connection("users").select("*");
+
     users = UserView.renderMany(users);
+
     return response.status(200).json(users);
   },
 
