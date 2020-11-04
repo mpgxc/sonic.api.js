@@ -5,9 +5,12 @@ export default {
     const { email, password } = request.body;
 
     try {
-      const user = await CreateSessionService.execute(email, password);
+      const { user, token } = await CreateSessionService.execute(
+        email,
+        password
+      );
 
-      return response.status(200).json(user);
+      return response.status(201).json({ user, token });
     } catch (error) {
       return response.status(404).json({ error: error.message });
     }
