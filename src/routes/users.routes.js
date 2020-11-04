@@ -1,27 +1,9 @@
 import { Router } from "express";
-import CreateUserService from "../services/CreateUser.Service";
+import UserController from "../controllers/User.Controller";
 
 const userRouter = Router();
 
-userRouter.get("/", (request, response) => {
-  return response.json({ message: "Deu certo!" });
-});
-
-userRouter.post("/", async (request, response) => {
-  const { name, avatar, email, password } = request.body;
-
-  try {
-    const user = await CreateUserService.execute({
-      name,
-      avatar,
-      email,
-      password,
-    });
-
-    return response.status(201).json(user);
-  } catch (error) {
-    return response.status(404).json({ error: error.message });
-  }
-});
+userRouter.get("/", UserController.index);
+userRouter.post("/", UserController.create);
 
 export default userRouter;
