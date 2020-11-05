@@ -1,4 +1,5 @@
-import connection from "../database/connection";
+import connection from "../database/database.connection";
+import { sonicChannelIngest } from "../database/sonic.connection";
 
 export default {
   async execute(userPost) {
@@ -18,11 +19,21 @@ export default {
     const trxConnection = await connection.transaction();
 
     try {
-      const postInserted = await trxConnection("posts")
+      const [postInserted] = await trxConnection("posts")
         .insert(userPost)
         .returning("*");
 
       await trxConnection.commit();
+
+      await sonicChannelIngest.push(
+        "posts",
+        "default",
+        `post:${postInserted.id}`,
+        `${userPost.title} ${userPost.content}`,
+        {
+          lang: "por",
+        }
+      );
 
       return postInserted;
     } catch (error) {
