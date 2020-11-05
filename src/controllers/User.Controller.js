@@ -4,25 +4,27 @@ import UserView from "../views/User.View";
 
 export default {
   async index(_request, response) {
-    let users = await connection("users").select("*");
+    const users = await connection("users").select("*");
 
-    users = UserView.renderMany(users);
+    const parserdUsers = UserView.renderMany(users);
 
-    return response.status(200).json(users);
+    return response.status(200).json(parserdUsers);
   },
 
   async create(request, response) {
     const { name, avatar, email, password } = request.body;
 
     try {
-      const user = await CreateUserService.execute({
+      const [user] = await CreateUserService.execute({
         name,
         avatar,
         email,
         password,
       });
 
-      return response.status(201).json(user);
+      const parserdUser = UserView.render(user);
+
+      return response.status(201).json(parserdUser);
     } catch (error) {
       return response.status(404).json({ error: error.message });
     }
