@@ -12,6 +12,15 @@ export default {
       throw new Error("Empty values for user!");
     }
 
+    const userExists = await connection("users")
+      .where("email", userData.email)
+      .select("*")
+      .first();
+
+    if (userExists) {
+      throw new Error("User Already register!");
+    }
+
     const trxConnection = await connection.transaction();
 
     try {
