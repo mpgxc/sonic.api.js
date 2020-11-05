@@ -1,4 +1,4 @@
-import connection from "../database/connection";
+import connection from "../database/database.connection";
 import { hash } from "bcryptjs";
 
 export default {

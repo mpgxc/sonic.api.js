@@ -1,5 +1,5 @@
 import CreatePostService from "../services/CreatePost.Service";
-import connection from "../database/connection";
+import connection from "../database/database.connection";
 
 export default {
   async index(request, response) {
@@ -19,7 +19,7 @@ export default {
     const { title, content } = request.body;
 
     try {
-      const [post] = await CreatePostService.execute({
+      const post = await CreatePostService.execute({
         title,
         content,
         user_id: userId,

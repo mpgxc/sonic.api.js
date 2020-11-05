@@ -11,7 +11,8 @@
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.21.12",
         "path": "^0.12.7",
-        "pg": "^8.4.2"
+        "pg": "^8.4.2",
+        "sonic-channel": "^1.2.6"
     },
     "scripts": {
         "dev": "nodemon --exec sucrase-node ./src/server.js",

@@ -1,4 +1,4 @@
-import connection from "../database/connection";
+import connection from "../database/database.connection";
 import UserView from "../views/User.View";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
