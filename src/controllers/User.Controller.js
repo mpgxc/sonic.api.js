@@ -1,5 +1,5 @@
 import CreateUserService from "../services/CreateUser.Service";
-import connection from "../database/connection";
+import connection from "../database/database.connection";
 import UserView from "../views/User.View";
 
 export default {
