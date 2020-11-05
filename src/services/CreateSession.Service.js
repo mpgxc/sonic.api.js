@@ -1,7 +1,8 @@
 import connection from "../database/connection";
+import UserView from "../views/User.View";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
-import UserView from "../views/User.View";
+import authConfig from ".././config/auth";
 
 export default {
   async execute(email, password) {
@@ -23,10 +24,9 @@ export default {
     if (!passwordMatched) {
       throw new Error("Incorrect email / password combination!");
     }
-
-    const token = sign({}, "jhkasjhdsakdjashdkjashdkjsadhasd", {
+    const token = sign({}, authConfig.jwt.secret, {
       subject: String(user.id),
-      expiresIn: "1d",
+      expiresIn: authConfig.jwt.expiresIn,
     });
 
     return { user: UserView.render(user), token };
