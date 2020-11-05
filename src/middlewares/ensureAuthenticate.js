@@ -13,7 +13,7 @@ const ensureAuthenticate = (request, response, next) => {
   try {
     const verifyTokenIsValid = verify(token, authConfig.jwt.secret);
 
-    console.log(verifyTokenIsValid);
+    request.userId = verifyTokenIsValid.sub;
 
     return next();
   } catch (error) {
