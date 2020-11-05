@@ -6,7 +6,7 @@ const postRouter = Router();
 
 postRouter.use(ensureAuthenticate);
 
-postRouter.get("/", ensureAuthenticate, PostController.index);
+postRouter.get("/", PostController.index);
 postRouter.post("/", PostController.create);
 
 export default postRouter;
