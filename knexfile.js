@@ -5,9 +5,9 @@ module.exports = {
   development: {
     client: "postgresql",
     connection: {
-      database: "developing-virtex",
+      database: "postgres",
       user: "postgres",
-      password: "docker",
+      password: "sonic_pass",
     },
     pool: {
       min: 2,
